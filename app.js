@@ -3,7 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var session = require('express-session');
+var uuid = require('uuid/v4');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -18,6 +19,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  genid: function(req){
+    return uuid();
+  },
+  secret: 'secretBoy',
+  resave: true,
+  saveUninitialized: true,
+}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

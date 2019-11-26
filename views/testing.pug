@@ -24,8 +24,9 @@ html(lang='en')
               | JADWAL
             a.title-nav.nav-item.nav-link.text-white(href='/berkas')
               | BERKAS
-            a.title-nav.nav-item.nav-link.text-white(href='/status')
-              | STATUS
+            if req
+                form.w-35.mx-auto.d-block(action='/logout', method='POST')
+                    button.btn-1.Logout Logout
 
     main
       .jbtron
@@ -35,11 +36,16 @@ html(lang='en')
         .small-space
         .col-lg-4
           .row
-            .col-5(style='padding-left:0; padding-right:0;')
-              button.btn-1(type='button', onclick="location.href = '/login'")
-                | LOGIN
-            .cond-space
-            .col-5(style='padding-left:0;')
-              button.btn-1(type='button', onclick="location.href = '/register'")
-                | REGISTER
+            if !req
+                .col-5(style='padding-left:0; padding-right:0;')
+                    button.btn-1(type='button', onclick="location.href = '/login'")
+                        | LOGIN
+                    .cond-space
+                .col-5(style='padding-left:0;')
+                    button.btn-1(type='button', onclick="location.href = '/register'")
+                        | REGISTER
+            else
+                .col-5
+                    button.btn-1(type='button', onclick="location.href = '/status'")
+                       | STATUS
     footer

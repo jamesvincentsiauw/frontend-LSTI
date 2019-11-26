@@ -25,13 +25,11 @@ html(lang='en')
               | JADWAL
             a.title-nav.nav-item.nav-link(href='/berkas')
               | BERKAS
-            a.title-nav.nav-item.nav-link(href='/status')
-              | STATUS
               
     main(style='margin-top:100px;')
       p.title-small.text-center  Login.
       .small-space
-      form.w-35.mx-auto.d-block(action='http://178.128.104.74/pengelolaanjalurseleksipmb/auth/login', method='POST', enctype='application/x-www-form-urlencoded')
+      form.w-35.mx-auto.d-block(action='/login', method='POST')
         .form-group
           label.paragraph(for='inputUsername') Username
           input#inputUsername.form-control(name='username', type='text', placeholder='isi username anda')

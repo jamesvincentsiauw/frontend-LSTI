@@ -26,13 +26,11 @@ html(lang='en')
               | JADWAL
             a.title-nav.nav-item.nav-link(href='/berkas')
               | BERKAS
-            a.title-nav.nav-item.nav-link(href='/status')
-              | STATUS
               
     main(style='margin-top:100px;')
       p.title-small.text-center  Register.
       .small-space
-      form.w-35.mx-auto.d-block(action='http://localhost:3000/auth/register', method='post', enctype='application/x-www-form-urlencoded')
+      form.w-35.mx-auto.d-block(action='/register' method='post', enctype='application/x-www-form-urlencoded')
         .form-group
           label.paragraph(for='inputName') Nama Lengkap
           input#inputName.form-control(name='nama', type='text', placeholder='isi nama lengkap anda')

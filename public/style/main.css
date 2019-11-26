@@ -107,7 +107,12 @@
     font-weight:bold;
     font-size:18px;
 }
-
+.btn-2:hover{
+    background-color: white;
+    color: black;
+    transition-duration: 0.8s;
+    transform: scale(1.05);
+}
 .footer-img{
     position:absolute;
     bottom:0;
