@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+    script.
+      $.ajax({
+      url: 'http://178.128.104.74/pengelolaanjalurseleksipmb/student/jadwal',
+      type: 'get',
+      dataType: 'json',
+      success: function (response) {
+      console.log(response['results'])
+      },
+      error: function (response) {
+      console.log(response)
+      }
+      })
