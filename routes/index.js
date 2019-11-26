@@ -21,7 +21,15 @@ router.get('/berkas', function (req,res,next) {
     res.render('berkas');
 });
 router.get('/login', function (req,res,next) {
-    res.render('login');
+    requestify.post('http://178.128.104.74/pengelolaanjalurseleksipmb/auth/login')
+        .then(function (response) {
+            if (response.body[0].sessionID != null){
+                res.redirect('/');
+            }
+            else{
+                res.render('/login');
+            }
+        });
 });
 router.get('/register', function (req,res,next) {
     res.render('register');
