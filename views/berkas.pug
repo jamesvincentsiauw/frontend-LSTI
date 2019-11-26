@@ -11,6 +11,7 @@ html(lang='en')
     script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
     // Custom CSS
     link(rel='stylesheet', href='style/main.css')
+  
   body#bs-override
     header
       nav.navbar.navbar-expand-md.navbar-light.fixed-top.bg-white
@@ -26,6 +27,8 @@ html(lang='en')
               | JADWAL
             a.title-nav.nav-item.nav-link(href='/berkas')
               | BERKAS
+            a.title-nav.nav-item.nav-link(href='/status')
+              | STATUS
 
 main.main-margin
   p.title-medium Good Day, ....!
@@ -33,30 +36,11 @@ main.main-margin
   div
     form.w-50.mx-auto
       .form-group
-        label.d-block.paragraph(for='inputGroupFile01') Ijazah SMA
+      for item in req
+        label.d-block.paragraph(for='inputGroupFile01') #{item.files}
         .custom-file
           input#inputGroupFile01.custom-file-input(type='file' aria-describedby='inputGroupFileAddon01')
           label.custom-file-label(for='inputGroupFile01') Choose file
-      .form-group
-        label.d-block.paragraph(for='inputGroupFile02') Nilai Rapor
-        .custom-file
-          input#inputGroupFile02.custom-file-input(type='file' aria-describedby='inputGroupFileAddon01')
-          label.custom-file-label(for='inputGroupFile02') Choose file
-      .form-group
-        label.d-block.paragraph(for='inputGroupFile03') Nilai UTBK
-        .custom-file
-          input#inputGroupFile03.custom-file-input(type='file' aria-describedby='inputGroupFileAddon01')
-          label.custom-file-label(for='inputGroupFile03') Choose file
-      .form-group
-        label.d-block.paragraph(for='inputGroupFile04') Akte Kelahiran
-        .custom-file
-          input#inputGroupFile04.custom-file-input(type='file' aria-describedby='inputGroupFileAddon01')
-          label.custom-file-label(for='inputGroupFile04') Choose file
-      .form-group
-        label.d-block.paragraph(for='inputGroupFile05') Pas Foto 3x4 Berwarna
-        .custom-file
-          input#inputGroupFile05.custom-file-input(type='file' aria-describedby='inputGroupFileAddon01')
-          label.custom-file-label(for='inputGroupFile05') Choose file
       .small-space
       button.btn-2.d-block.mx-auto Submit
   .small-space
