@@ -11,9 +11,11 @@ router.get('/tes',function(req, res, next){
     res.render('testing');
 });
 router.get('/jadwal', function (req,res,next) {
-    res.render('jadwal', {hasil: requestify.get('http://178.128.104.74/pengelolaanjalurseleksipmb/student/jadwal').then(function(response) {
-        JSON.stringify(response.getBody());
-        })})
+    requestify.get('http://178.128.104.74/pengelolaanjalurseleksipmb/student/jadwal')
+        .then(function (response) {
+            // res.send(response.getBody()['results'][0].kegiatan);
+            res.render('jadwal',{hasil: response.getBody()['results']})
+        });
 });
 router.get('/berkas', function (req,res,next) {
     res.render('berkas');

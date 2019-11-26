@@ -28,34 +28,20 @@ html(lang='en')
               | BERKAS
     main.main-margin
       p.title-medium Good Day, Suharno!
-      | #{hasil}
       div(style='margin-top:25px;')
-        .card.w-75
-          .card-body
-            .row
-              .col-4
-                h5.card-title.title-small Pendaftaran SM ITB
-                p.paragraph-muted.d-inline 24 Januari 2019
-                p.paragraph-muted.d-inline -
-                p.paragraph-muted.d-inline 28 Januari 2019
-              .col-8
-                p.card-text.paragraph
-                  | Calon peserta proses penerimaan mahasiswa baru yang ingin melalui proses seleksi mandiri
-                  | dapat mendaftar secara langsung di website resmi proses penerimaan mahasiswa baru ITB dengan mengisikan data diri secara lengkap
-                  | untuk kemudian diberikan informasi lebih lanjut melalui email.
-        .small-space
-        .card.w-75
-          .card-body
-            .row
-              .col-4
-                h5.card-title.title-small Pendaftaran SM ITB
-                p.paragraph-muted.d-inline 24 Januari 2019
-                p.paragraph-muted.d-inline -
-                p.paragraph-muted.d-inline 28 Januari 2019
-              .col-8
-                p.card-text.paragraph
-                  | Calon peserta proses penerimaan mahasiswa baru yang ingin melalui proses seleksi mandiri
-                  | dapat mendaftar secara langsung di website resmi proses penerimaan mahasiswa baru ITB dengan mengisikan data diri secara lengkap
-                  | untuk kemudian diberikan informasi lebih lanjut melalui email.
-        .small-space
+        for item in hasil
+            .card.w-75
+                .card-body
+                    .row
+                        .col-4
+                            h5.card-title.title-small #{item.kegiatan}
+                            p.paragraph-muted.d-inline #{item.tanggalmulai}
+                            p.paragraph-muted.d-inline -
+                            p.paragraph-muted.d-inline #{item.tanggalselesai}
+                        .col-8
+                            p.card-text.paragraph
+                              | Calon peserta proses penerimaan mahasiswa baru yang ingin melalui proses seleksi mandiri
+                              | dapat mendaftar secara langsung di website resmi proses penerimaan mahasiswa baru ITB dengan mengisikan data diri secara lengkap
+                              | untuk kemudian diberikan informasi lebih lanjut melalui email.
+            .small-space
     footer
