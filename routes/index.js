@@ -6,7 +6,7 @@ var requestify = require('requestify');
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
-router.get('/tes',function(req, res, next){
+router.get('/',function(req, res, next){
     if (req.session.loggedIn){
         var data = true
     }
@@ -79,7 +79,7 @@ router.post('/login', function (req,res,next) {
             if (response.getBody()['description'] !== 'Anda belum terdaftar sebagai user') {
                 req.session.loggedIn = true;
                 req.session.username = req.body.username;
-                res.redirect('/tes')
+                res.redirect('/')
             }
             else {
                 res.render('login', {message: response.getBody()['results']})
@@ -96,7 +96,7 @@ router.post('/login', function (req,res,next) {
 });
 router.get('/register', function (req,res,next) {
     if (req.session.loggedIn){
-        res.redirect('/tes')
+        res.redirect('/')
     }
     else{
         res.render('register')
@@ -134,7 +134,7 @@ router.post('/logout', function (req,res) {
         .then(function (response) {
             console.log(response);
             req.session.loggedIn = false;
-            res.redirect('/tes');
+            res.redirect('/');
         })
 });
 router.get('/jadwaladmin', function (req,res,next) {
