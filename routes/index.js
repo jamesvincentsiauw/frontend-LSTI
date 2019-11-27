@@ -12,6 +12,18 @@ router.get('/',function(req, res, next){
     }
     res.render('testing', {req: data, username: req.session.username});
 });
+router.get('/admin/berkas', function (req,res) {
+    requestify.get('http://178.128.104.74/pengelolaanjalurseleksipmb/student/requirements')
+            .then(function (response) {
+                if (req.session.loggedIn){
+                    var data = true
+                }
+                else{
+                    var data = false
+                }
+                res.render('berkas',{data:data, req: response.getBody()['results'], username: req.session.username, idpendaftar: req.session.idPendaftar})
+            });
+});
 router.get('/jadwal', function (req,res,next) {
     requestify.get('http://178.128.104.74/pengelolaanjalurseleksipmb/student/jadwal')
         .then(function (response) {
@@ -43,7 +55,10 @@ router.get('/berkas', function (req,res,next) {
     }
 });
 router.get('/status', function (req,res,next) {
-    requestify.get('http://178.128.104.74/pengelolaanjalurseleksipmb/student/files?id='+req.session.idPendaftar)
+    console.log(req.session.username);
+    requestify.request('http://178.128.104.74/pengelolaanjalurseleksipmb/student/files?id='+req.session.idPendaftar,{
+        method: 'GET'
+    })
         .then(function (response) {
             if (req.session.loggedIn){
                 var data = true
@@ -64,6 +79,7 @@ router.get('/login', function (req,res,next) {
     }
 });
 router.post('/login', function (req,res,next) {
+    var id,name;
     requestify.request('http://178.128.104.74/pengelolaanjalurseleksipmb/auth/login', {
         method: 'POST',
         body:{
@@ -73,23 +89,27 @@ router.post('/login', function (req,res,next) {
     })
         .then(function (response) {
             console.log(response.getBody());
-            if (response.getBody()['description'] !== 'Anda belum terdaftar sebagai user') {
-                req.session.loggedIn = true;
-                req.session.username = req.body.username;
-                res.redirect('/')
-            }
-            else {
-                res.render('login', {message: response.getBody()['results']})
-            }
+            req.session.loggedIn = true;
+            req.session.username = req.body.username;
+            console.log(req.session.username);
+            requestify.request('http://178.128.104.74/pengelolaanjalurseleksipmb/student',{
+                method: 'GET',
+
+            })
+                .then(function (hasil) {
+                    for(var i=0;i<hasil.getBody()['results'].length;i++){
+                        if (hasil.getBody()['results'][i]['username'] === req.session.username){
+                            id = hasil.getBody()['results'][i]['idpendaftar'];
+                            name = hasil.getBody()['results'][i]['namapendaftar'];
+                            req.session.idPendaftar = id;
+                            req.session.name = name;
+                            console.log(req.session.idPendaftar);
+                            console.log(req.session.name);
+                            res.redirect('/')
+                        }
+                    }
+                });
         });
-    requestify.get('http://178.128.104.74/pengelolaanjalurseleksipmb/student')
-        .then(function (response) {
-            console.log(response);
-            req.session.idPendaftar = response.getBody()['results'][0]['idpendaftar'];
-            req.session.name = response.getBody()['results'][0]['namapendaftar'];
-            console.log(req.session.idPendaftar);
-            console.log(req.session.name)
-        })
 });
 router.get('/register', function (req,res,next) {
     if (req.session.loggedIn){

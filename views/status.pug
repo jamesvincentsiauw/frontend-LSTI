@@ -33,15 +33,26 @@ html(lang='en')
     main.main-margin
       p.title-medium Good Day, #{username}!
       div(style='margin-top:25px;')
+      -function prettyDate(dateString){
+        -var date = new Date(dateString);
+        -var d = date.getDate(dateString);
+        -var monthNames = [ "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" ];
+        -var m = monthNames[date.getMonth()];
+        -var y = date.getFullYear();
+        -return d+' '+m+' '+y;
+    -}
             .card.w-75
                 .card-body
                     .row
                         .col-8
                             h5.card-title.title-small File yang Sudah Diupload
                             p.card-text.paragraph
-                               for item in file
-                                    | - #{item.idfiles} UPLOADED AT #{item.uploadeddate}
-                                    br
+                                if file[0].idfiles !== undefined
+                                    for item in file
+                                        | - #{item.idfiles} UPLOADED AT #{prettyDate(item.uploadeddate)}
+                                        br
+                                else
+                                    | You have not upload any files
                             
             .small-space
     footer 
