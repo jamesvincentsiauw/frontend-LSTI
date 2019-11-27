@@ -3,17 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ffd757c1-7b77-4ccf-aad1-1a650bb7fd14" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/style/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/style/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/berkas.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/berkas.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/jadwal.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/jadwal.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/login.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/login.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/register.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/register.pug" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/jadwaladmin.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/jadwaladmin.pug" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/status.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/status.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/testing.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/testing.pug" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +55,8 @@
       <workItem from="1574509561171" duration="556000" />
       <workItem from="1574735131039" duration="4432000" />
       <workItem from="1574772018808" duration="3185000" />
-      <workItem from="1574786658659" duration="8928000" />
+      <workItem from="1574786658659" duration="9577000" />
+      <workItem from="1574822497152" duration="16943000" />
     </task>
     <servers />
   </component>

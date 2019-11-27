@@ -35,13 +35,23 @@ main.main-margin
   p.title-medium Good Day, #{username}!
   .small-space
   div
-    form.w-50.mx-auto
+    form.w-50.mx-auto(action='/berkas', method='post', enctype='application/x-www-form-urlencoded')
       .form-group
-      for item in req
-        label.d-block.paragraph(for='inputGroupFile01') #{item.files}
-        .custom-file
-          input#inputGroupFile01.custom-file-input(type='file' aria-describedby='inputGroupFileAddon01')
-          label.custom-file-label(for='inputGroupFile01') Choose file
+          label.d-block.paragraph(for='idpendaftar') ID Pendaftar
+          a #{idpendaftar}
+      .form-group
+          label.d-block.paragraph(for='jalur') Jalur Seleksi
+          input#jalur(type='text', name='jalur', placeholder='Seleksi Mandiri/SNMPTN/SBMPTN/S2/S3')
+      .form-group
+          label.d-block.paragraph(for='files') Pilih File
+          select(name='files')
+            for item in req
+              option(value=item.id) #{item.files}
+      .form-group
+          label.d-block.paragraph(for='inputfile') Upload File
+          .custom-file
+              input#inputfile(type='file' aria-describedby='inputGroupFileAddon01')
+
       .small-space
       button.btn-2.d-block.mx-auto Submit
   .small-space

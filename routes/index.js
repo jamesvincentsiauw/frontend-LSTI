@@ -37,7 +37,8 @@ router.get('/berkas', function (req,res,next) {
                 else{
                     var data = false
                 }
-                res.render('berkas',{data:data, req: response.getBody()['results'], username: req.session.username})
+                console.log('id '+req.session.idPendaftar);
+                res.render('berkas',{data:data, req: response.getBody()['results'], username: req.session.username, idpendaftar: req.session.idPendaftar})
             });
     }
     else{
@@ -45,7 +46,7 @@ router.get('/berkas', function (req,res,next) {
     }
 });
 router.get('/status', function (req,res,next) {
-    requestify.get('http://178.128.104.74/pengelolaanjalurseleksipmb/student/files')
+    requestify.get('http://178.128.104.74/pengelolaanjalurseleksipmb/student/files?id='+req.session.idPendaftar)
         .then(function (response) {
             if (req.session.loggedIn){
                 var data = true
@@ -53,6 +54,7 @@ router.get('/status', function (req,res,next) {
             else{
                 var data = false
             }
+            console.log(response.getBody());
             res.render('status',{req:data,file: response.getBody()['results'], username: req.session.username})
         });
 });
@@ -82,6 +84,14 @@ router.post('/login', function (req,res,next) {
             else {
                 res.render('login', {message: response.getBody()['results']})
             }
+        });
+    requestify.get('http://178.128.104.74/pengelolaanjalurseleksipmb/student')
+        .then(function (response) {
+            console.log(response);
+            req.session.idPendaftar = response.getBody()['results'][0]['idpendaftar'];
+            req.session.name = response.getBody()['results'][0]['namapendaftar'];
+            console.log(req.session.idPendaftar);
+            console.log(req.session.name)
         })
 });
 router.get('/register', function (req,res,next) {
@@ -133,5 +143,73 @@ router.get('/jadwaladmin', function (req,res,next) {
             // res.send(response.getBody()['results'][0].kegiatan);
             res.render('jadwaladmin',{hasil: response.getBody()['results']})
         });
+});
+router.post('/jadwaladmin/:id', function (req, res) {
+    requestify.delete('http://178.128.104.74/pengelolaanjalurseleksipmb/admin/jadwal/'+req.params.id+'?token=8t7aBO1Q6Y0ZcC76A')
+        .then(function (response) {
+            console.log(response.getBody());
+            res.redirect('back');
+        })
+});
+router.get('/jadwaladmin/update/:id', function (req, res) {
+    requestify.get('http://178.128.104.74/pengelolaanjalurseleksipmb/student/jadwal/')
+        .then(function (response) {
+            response.getBody()['results'].forEach(function (value) {
+               if (value['id'] === req.params.id){
+                   var hasil = value;
+                   console.log(hasil);
+                   res.render('editjadwal',{jadwal: hasil, id: req.params.id});
+               }
+            });
+        })
+});
+router.post('/jadwaladmin/update/:id', function (req,res) {
+    requestify.request('http://178.128.104.74/pengelolaanjalurseleksipmb/admin/jadwal/'+req.params.id+'?token='+req.body.token, {
+        method: 'PUT',
+        body: {
+            kegiatan: req.body.kegiatan,
+            tanggalMulai: req.body.tanggalMulai,
+            tanggalAkhir: req.body.tanggalAkhir
+        }
+    })
+        .then(function (response) {
+            console.log(response.getBody());
+            res.redirect('/jadwaladmin');
+        })
+        .fail(function (response) {
+            console.log(response.getBody());
+        });
+    console.log(req.body.kegiatan);
+    console.log(req.body.tanggalMulai);
+});
+router.get('/addjadwal',function (req,res) {
+    res.render('addjadwal')
+});
+router.post('/addjadwal', function (req,res) {
+    requestify.request('http://178.128.104.74/pengelolaanjalurseleksipmb/admin/jadwal?token='+req.body.token, {
+        method: 'POST',
+        body: {
+            kegiatan: req.body.kegiatan,
+            tanggalMulai: req.body.tanggalMulai,
+            tanggalAkhir: req.body.tanggalAkhir
+        }
+    })
+        .then(function (response) {
+            console.log(response.getBody());
+            res.redirect('/jadwaladmin');
+        })
+});
+router.post('/berkas', function (req, res) {
+    requestify.request('http://178.128.104.74/pengelolaanjalurseleksipmb/student/requirements?id='+req.session.idPendaftar, {
+        method: 'POST',
+        body: {
+            idfiles: req.body.files,
+            jalur: req.body.jalur
+        }
+    })
+        .then(function (response) {
+            console.log(response);
+            res.redirect('back')
+        })
 });
 module.exports = router;

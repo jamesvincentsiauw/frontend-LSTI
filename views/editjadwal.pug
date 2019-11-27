@@ -1,0 +1,34 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    title Edit Jadwal
+    // Bootstrap
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.css')
+    script(src='https://code.jquery.com/jquery-2.1.3.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js')
+    // Custom CSS
+    link(rel='stylesheet', href='/style/main.css')
+  body#bs-override
+    main(style='margin-top:100px;')
+      p.title-small.text-center  Edit Jadwal.
+      .small-space
+      form.w-35.mx-auto.d-block(action='/jadwaladmin/update/'+id ,method='post', enctype='application/x-www-form-urlencoded')
+        .form-group
+          label.paragraph(for='token') Token Admin
+          input#token.form-control(name='token', type='text', placeholder='Token Admin', required='true')
+        .form-group
+          label.paragraph(for='kegiatan') Kegiatan
+          input#kegiatan.form-control(name='kegiatan', type='text', value=jadwal['kegiatan'], required='true')
+        .form-group
+          label.paragraph(for='tanggalMulai') Tanggal Mulai
+          input#tanggalMulai.form-control(type='text', name='tanggalMulai', value=jadwal['tanggalmulai'], required='true')
+        .form-group
+          label.paragraph(for='tanggalAkhir') Tanggal Selesai
+          input#tanggalAkhir.form-control(type='text', name='tanggalAkhir', value=jadwal['tanggalselesai'], required='true')
+        .small-space
+        button.btn-2.d-block.mx-auto Submit
+      .small-space
+    footer

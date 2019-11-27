@@ -40,7 +40,8 @@ html(lang='en')
                             h5.card-title.title-small File yang Sudah Diupload
                             p.card-text.paragraph
                                for item in file
-                                    |#{item.filepath} #{item.uploadeddate} #{item.verified}
+                                    | - #{item.idfiles} UPLOADED AT #{item.uploadeddate}
+                                    br
                             
             .small-space
     footer 

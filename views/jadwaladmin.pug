@@ -50,23 +50,14 @@ html(lang='en')
                               |-
                               p.h4|#{prettyDate(item.tanggalselesai)}
                         .col-3
+                            a.btn-2(type='button',href='/jadwaladmin/update/'+item.id) UPDATE
                             div
-                            button.btn-2(href='#') DELETE
+                                form.w-35.mx-auto.d-block(action='/jadwaladmin/'+item.id, method='post', enctype='application/x-www-form-urlencoded')
+                                    button.btn-2.d-block.mx-auto(type='submit') DELETE
                             div(style='margin-top:15px;')
-                            button.btn-2(href='#') UPDATE
                         .small-space
         .card.w-75
           .card-body
-            .row
-              .col-3
-                h5.card-title.title-small Jadwal Baru
-              .col-6
-                p.h4|Tanggal Mulai
-                |-
-                p.h4|Tanggal Selesai
-              .col-3
-                div
-                button.btn-2(href='#') ADD NEW
-                div(style='margin-top:15px;')
+            button.btn-2(onclick="location.href='/addjadwal'") ADD NEW
         .small-space
     footer
