@@ -3,9 +3,6 @@ var router = express.Router();
 var requestify = require('requestify');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
-});
 router.get('/',function(req, res, next){
     if (req.session.loggedIn){
         var data = true
